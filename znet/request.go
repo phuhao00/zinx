@@ -1,13 +1,13 @@
 package znet
 
-import "awesomeProject/ziface"
+import "awesomeProject/itface"
 
 type Request struct {
-	conn ziface.IConnection //已经和客户端建立好的 链接
-	msg ziface.IMessage 	//客户端请求的数据
+	conn itface.IConnection //已经和客户端建立好的 链接
+	msg  itface.IMessage    //客户端请求的数据
 }
 //获取请求连接信息
-func(r *Request) GetConnection() ziface.IConnection {
+func(r *Request) GetConnection() itface.IConnection {
 	return r.conn
 }
 //获取请求消息的数据

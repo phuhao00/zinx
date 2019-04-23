@@ -1,8 +1,8 @@
 package znet
 
 import (
+	"awesomeProject/itface"
 	"awesomeProject/utils"
-	"awesomeProject/ziface"
 	"errors"
 	"fmt"
 	"io"
@@ -12,7 +12,7 @@ import (
 
 type Connection struct {
 	//当前Conn属于哪个Server
-	TcpServer ziface.IServer
+	TcpServer itface.IServer
 	//当前连接的socket TCP套接字
 	Conn *net.TCPConn
 	//当前连接的ID 也可以称作为SessionID，ID全局唯一
@@ -20,7 +20,7 @@ type Connection struct {
 	//当前连接的关闭状态
 	isClosed bool
 	//消息管理MsgId和对应处理方法的消息管理模块
-	MsgHandler ziface.IMsgHandle
+	MsgHandler itface.IMsgHandle
 	//告知该链接已经退出/停止的channel
 	ExitBuffChan chan bool
 	//无缓冲管道，用于读、写两个goroutine之间的消息通信
@@ -35,7 +35,7 @@ type Connection struct {
 }
 
 //创建连接的方法
-func NewConntion(server ziface.IServer, conn *net.TCPConn, connID uint32, msgHandler ziface.IMsgHandle) *Connection {
+func NewConntion(server itface.IServer, conn *net.TCPConn, connID uint32, msgHandler itface.IMsgHandle) *Connection {
 	//初始化Conn属性
 	c := &Connection{
 		TcpServer:    server,
