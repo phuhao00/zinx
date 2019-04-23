@@ -1,11 +1,11 @@
 package main
 
 import (
+	"awesomeProject/ziface"
+	"awesomeProject/zinx_app_demo/mmo_game/api"
+	"awesomeProject/zinx_app_demo/mmo_game/core"
+	"awesomeProject/znet"
 	"fmt"
-	"zinx/ziface"
-	"zinx/zinx_app_demo/mmo_game/api"
-	"zinx/zinx_app_demo/mmo_game/core"
-	"zinx/znet"
 )
 
 //当客户端建立连接的时候的hook函数

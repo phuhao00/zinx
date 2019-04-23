@@ -1,11 +1,11 @@
 package znet
 
 import (
+	"awesomeProject/ziface"
 	"fmt"
 	"net"
 	"testing"
 	"time"
-	"zinx/ziface"
 )
 
 /*

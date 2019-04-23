@@ -1,10 +1,10 @@
 package znet
 
 import (
+	"awesomeProject/utils"
+	"awesomeProject/ziface"
 	"fmt"
 	"net"
-	"zinx/utils"
-	"zinx/ziface"
 )
 
 //iServer 接口实现，定义一个Server服务类

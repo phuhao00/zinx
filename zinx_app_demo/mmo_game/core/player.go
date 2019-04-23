@@ -1,12 +1,12 @@
 package core
 
 import (
+	"awesomeProject/ziface"
+	"awesomeProject/zinx_app_demo/mmo_game/pb"
 	"fmt"
 	"github.com/golang/protobuf/proto"
 	"math/rand"
 	"sync"
-	"zinx/ziface"
-	"zinx/zinx_app_demo/mmo_game/pb"
 )
 
 //玩家对象

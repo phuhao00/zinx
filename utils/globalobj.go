@@ -1,10 +1,10 @@
 package utils
 
 import (
+	"awesomeProject/ziface"
 	"encoding/json"
 	"io/ioutil"
 	"os"
-	"zinx/ziface"
 )
 
 /*

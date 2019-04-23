@@ -1,13 +1,13 @@
 package znet
 
 import (
+	"awesomeProject/utils"
+	"awesomeProject/ziface"
 	"errors"
 	"fmt"
 	"io"
 	"net"
 	"sync"
-	"zinx/utils"
-	"zinx/ziface"
 )
 
 type Connection struct {

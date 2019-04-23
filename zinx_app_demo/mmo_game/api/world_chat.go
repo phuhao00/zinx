@@ -1,12 +1,12 @@
 package api
 
 import (
+	"awesomeProject/ziface"
+	"awesomeProject/zinx_app_demo/mmo_game/core"
+	"awesomeProject/zinx_app_demo/mmo_game/pb"
+	"awesomeProject/znet"
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	"zinx/ziface"
-	"zinx/zinx_app_demo/mmo_game/core"
-	"zinx/zinx_app_demo/mmo_game/pb"
-	"zinx/znet"
 )
 
 //世界聊天 路由业务
