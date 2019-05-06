@@ -1,10 +1,15 @@
 package znet
 
 import (
-	"awesomeProject/utils"
 	"awesomeProject/itface"
+	"awesomeProject/utils"
 	"fmt"
+	"github.com/deckarep/golang-set"
+	"math/rand"
 	"net"
+	"sort"
+	"strconv"
+	"time"
 )
 
 //iServer 接口实现，定义一个Server服务类
@@ -25,6 +30,7 @@ type Server struct {
 	OnConnStart	func(conn itface.IConnection)
 	//该Server的连接断开时的Hook函数
 	OnConnStop func(conn itface.IConnection)
+	ConnIdSet mapset.Set
 }
 
 /*
@@ -39,6 +45,7 @@ func NewServer () itface.IServer {
 		Port:utils.GlobalObject.TcpPort,
 		msgHandler: NewMsgHandle(),
 		ConnMgr:NewConnManager(),
+		ConnIdSet:mapset.NewSet(),
 	}
 	return s
 }
@@ -76,8 +83,7 @@ func (s *Server) Start() {
 
 		//TODO server.go 应该有一个自动生成ID的方法
 		var cid uint32
-		cid = 0
-
+		cid = s.GetNewCid()
 		//3 启动server网络连接业务
 		for {
 			//3.1 阻塞等待客户端建立连接请求
@@ -96,8 +102,6 @@ func (s *Server) Start() {
 
 			//3.3 处理该新连接请求的 业务 方法， 此时应该有 handler 和 conn是绑定的
 			dealConn := NewConntion(s, conn, cid, s.msgHandler)
-			cid ++
-
 			//3.4 启动当前链接的处理业务
 			go dealConn.Start()
 		}
@@ -157,6 +161,27 @@ func (s *Server) CallOnConnStop(conn itface.IConnection) {
 		s.OnConnStop(conn)
 	}
 }
+//获取新的连接Id
+func (s *Server)GetNewCid() (NewCid uint32)  {
+	rand.Seed(time.Now().UnixNano())
+	randomSlice:=[]uint32{0,1,2,3,4,5,6,7,8,9}
+	sort.Slice(randomSlice, func(i, j int) bool {
+		return rand.Float32()<rand.Float32()
+	})
+	var tmpStr string
+	for _,ele:=range randomSlice{
+		tmpStr=tmpStr+ strconv.FormatInt(int64(ele),10)
+	}
+	if s.ConnIdSet.Contains(tmpStr) {
+		return s.GetNewCid()
+	}else {
+		s.ConnIdSet.Add(tmpStr)
+		id,_:=strconv.ParseInt(tmpStr,10,32)
+		NewCid=uint32(id)
+	}
+	return
+}
+
 
 
 

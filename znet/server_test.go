@@ -17,7 +17,7 @@ func ClientTest() {
 	//3秒之后发起测试请求，给服务端开启服务的机会
 	time.Sleep(3 * time.Second)
 
-	conn, err := net.Dial("tcp", "127.0.0.1:7777")
+	conn, err := net.Dial("tcp", "127.0.0.1:8999")
 	if err != nil {
 		fmt.Println("client start err, exit!")
 		return
@@ -97,7 +97,7 @@ func TestServerV0_3(t *testing.T) {
 	//创建一个server句柄
 	s := NewServer()
 
-	s.AddRouter(&PingRouter{})
+	s.AddRouter(2,&PingRouter{})
 
 	//	客户端测试
 	go ClientTest()

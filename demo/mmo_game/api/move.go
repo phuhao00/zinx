@@ -36,7 +36,6 @@ func (*MoveApi) Handle(request itface.IRequest) {
 
 	//3. 根据pid得到player对象
 	player := core.WorldMgrObj.GetPlayerByPid(pid.(int32))
-
 	//4. 让player对象发起移动位置信息广播
 	player.UpdatePos(msg.X, msg.Y, msg.Z, msg.V)
 }
