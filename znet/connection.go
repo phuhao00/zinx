@@ -198,7 +198,7 @@ func (c *Connection) SendMsg(msgId uint32, data []byte) error {
 	}
 	//将data封包，并且发送
 	dp := NewDataPack()
-	msg, err := dp.Pack(NewMsgPackage(msgId, data))
+	msg, err := dp.Pack(NewMsgPackage(msgId, data,nil))
 	if err != nil {
 		fmt.Println("Pack error msg id = ", msgId)
 		return errors.New("Pack error msg ")
@@ -216,7 +216,7 @@ func (c *Connection) SendBuffMsg(msgId uint32, data []byte) error {
 	}
 	//将data封包，并且发送
 	dp := NewDataPack()
-	msg, err := dp.Pack(NewMsgPackage(msgId, data))
+	msg, err := dp.Pack(NewMsgPackage(msgId, data,nil))
 	if err != nil {
 		fmt.Println("Pack error msg id = ", msgId)
 		return errors.New("Pack error msg ")

@@ -5,6 +5,7 @@ import (
 	"awesomeProject/utils"
 	"fmt"
 	"github.com/deckarep/golang-set"
+	"github.com/fatih/color"
 	"math/rand"
 	"net"
 	"sort"
@@ -58,7 +59,7 @@ func (s *Server) Start() {
 		utils.GlobalObject.Version,
 		utils.GlobalObject.MaxConn,
 		utils.GlobalObject.MaxPacketSize)
-
+		color.Yellow("huhao %v",7)
 	//开启一个go去做服务端Linster业务
 	go func() {
 		//0 启动worker工作池机制

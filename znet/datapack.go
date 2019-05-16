@@ -1,15 +1,22 @@
 package znet
 
 import (
-	"awesomeProject/utils"
 	"awesomeProject/itface"
+	"awesomeProject/utils"
 	"bytes"
 	"encoding/binary"
 	"errors"
 )
 
 //封包拆包类实例，暂时不需要成员
-type DataPack struct {}
+type DataPack struct {
+	//msgLength int
+	//version   uint16 //暂时尚未使用。首位征用，用于表示是否有ReqId
+	//MessageId uint32
+	//data      []byte
+	hasReqId  bool
+	ReqId     uint32 //在包尾
+}
 
 //封包拆包实例初始化方法
 func NewDataPack() *DataPack {

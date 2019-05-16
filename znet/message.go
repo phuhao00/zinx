@@ -1,17 +1,24 @@
 package znet
 
+import (
+	"awesomeProject/demo/mmo_game/conf"
+)
+
 type Message struct {
-	DataLen uint32 //消息的长度
-	Id      uint32 //消息的ID
-	Data    []byte //消息的内容
+	DataLen   uint32         //消息的长度
+	Id        uint32         //消息的ID
+	Data      []byte         //消息的内容
+	Version   uint16         //暂时尚未使用。首位征用，用于表示是否有ReqId
+	ErrorInfo conf.ErrorInfo //错误信息
 }
 
 //创建一个Message消息包
-func NewMsgPackage(id uint32, data []byte) *Message {
+func NewMsgPackage(id uint32, data []byte,ErrorInfo *conf.ErrorInfo) *Message {
 	return &Message{
 		DataLen: uint32(len(data)),
 		Id:     id,
 		Data:   data,
+		ErrorInfo:*ErrorInfo,
 	}
 }
 
@@ -44,3 +51,7 @@ func (msg *Message) SetMsgId(msgId uint32) {
 func (msg *Message) SetData(data []byte) {
 	msg.Data = data
 }
+////
+//func (msg *Message)Pack()  {
+//
+//}

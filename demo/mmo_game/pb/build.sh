@@ -1,4 +1,4 @@
 #!/bin/bash
 
-protoc-gen-go --go_out=./ID/ ./ID/messageId.proto
+protoc --go_out=./ID/ ./ID/messageId.proto
 

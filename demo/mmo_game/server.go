@@ -5,6 +5,7 @@ import (
 	"awesomeProject/demo/mmo_game/core"
 	"awesomeProject/itface"
 	"awesomeProject/znet"
+	"flag"
 	"fmt"
 )
 
@@ -48,6 +49,16 @@ func OnConnectionLost(conn itface.IConnection) {
 
 }
 
+var isDaemon, isForever, isOnlyCheckAlive bool
+var flagvar int
+func init() {
+	flag.IntVar(&flagvar, "flagname", 1234, "help message for flagname")
+}
+func init()  {
+	 flag.BoolVar(&isDaemon,"daemon", false, "is daemon background")
+	 flag.BoolVar(&isForever,"forever", false, "is guard forever")
+	 flag.BoolVar(&isOnlyCheckAlive,"checkAlive", false, "is guard forever")
+}
 func main() {
 	//创建服务器句柄
 	s := znet.NewServer()

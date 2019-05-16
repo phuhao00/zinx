@@ -13,8 +13,7 @@ import (
 type MoveApi struct {
 	znet.BaseRouter
 }
-
-
+//
 func (*MoveApi) Handle(request itface.IRequest) {
 	//1. 将客户端传来的proto协议解码
 	msg := &pb.Position{}
