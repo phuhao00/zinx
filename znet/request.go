@@ -1,6 +1,6 @@
 package znet
 
-import "awesomeProject/itface"
+import "github.com/phuhao00/zinx/itface"
 
 type Request struct {
 	conn itface.IConnection //已经和客户端建立好的 链接

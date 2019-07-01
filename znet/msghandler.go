@@ -1,9 +1,9 @@
 package znet
 
 import (
-	"awesomeProject/utils"
-	"awesomeProject/itface"
 	"fmt"
+	"github.com/phuhao00/zinx/itface"
+	"github.com/phuhao00/zinx/utils"
 	"strconv"
 )
 

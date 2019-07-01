@@ -1,7 +1,7 @@
 package znet
 
 import (
-	"awesomeProject/demo/mmo_game/conf"
+	. "github.com/phuhao00/zinx/demo/mmo_game/conf/err"
 )
 
 type Message struct {
@@ -9,16 +9,16 @@ type Message struct {
 	Id        uint32         //消息的ID
 	Data      []byte         //消息的内容
 	Version   uint16         //暂时尚未使用。首位征用，用于表示是否有ReqId
-	ErrorInfo conf.ErrorInfo //错误信息
+	ErrorInfo *ErrorInfo //错误信息
 }
 
 //创建一个Message消息包
-func NewMsgPackage(id uint32, data []byte,ErrorInfo *conf.ErrorInfo) *Message {
+func NewMsgPackage(id uint32, data []byte,ErrorInfo *ErrorInfo) *Message {
 	return &Message{
 		DataLen: uint32(len(data)),
 		Id:     id,
 		Data:   data,
-		ErrorInfo:*ErrorInfo,
+		ErrorInfo:ErrorInfo,
 	}
 }
 

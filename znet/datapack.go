@@ -1,11 +1,11 @@
 package znet
 
 import (
-	"awesomeProject/itface"
-	"awesomeProject/utils"
 	"bytes"
 	"encoding/binary"
 	"errors"
+	"github.com/phuhao00/zinx/itface"
+	"github.com/phuhao00/zinx/utils"
 )
 
 //封包拆包类实例，暂时不需要成员

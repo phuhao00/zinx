@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"awesomeProject/itface"
 	"encoding/json"
+	"github.com/phuhao00/zinx/itface"
 	"io/ioutil"
 	"os"
 )

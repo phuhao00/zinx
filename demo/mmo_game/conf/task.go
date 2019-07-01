@@ -1,6 +1,6 @@
 package conf
 
-import ."awesomeProject/demo/mmo_game/pb/SubscriberID"
+import ."github.com/phuhao00/zinx/demo/mmo_game/pb/SubscriberID"
 //任务的状态
 const (
 	TaskState_Init =iota+1

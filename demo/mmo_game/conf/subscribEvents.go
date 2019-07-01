@@ -1,8 +1,8 @@
 package conf
 
 import (
-	. "awesomeProject/demo/mmo_game/pb/SubscriberID"
-	."github.com/gookit/event"
+	. "github.com/gookit/event"
+	. "github.com/phuhao00/zinx/demo/mmo_game/pb/SubscriberID"
 )
 
 var subscribedEvents =map[SubscriberId]map[string]interface{}{

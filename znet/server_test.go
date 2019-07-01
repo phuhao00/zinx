@@ -1,8 +1,8 @@
 package znet
 
 import (
-	"awesomeProject/itface"
 	"fmt"
+	"github.com/phuhao00/zinx/itface"
 	"net"
 	"testing"
 	"time"

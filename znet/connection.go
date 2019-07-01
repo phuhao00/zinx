@@ -1,10 +1,10 @@
 package znet
 
 import (
-	"awesomeProject/itface"
-	"awesomeProject/utils"
 	"errors"
 	"fmt"
+	"github.com/phuhao00/zinx/itface"
+	"github.com/phuhao00/zinx/utils"
 	"io"
 	"net"
 	"sync"

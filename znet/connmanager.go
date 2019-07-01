@@ -1,9 +1,9 @@
 package znet
 
 import (
-	"awesomeProject/itface"
 	"errors"
 	"fmt"
+	"github.com/phuhao00/zinx/itface"
 	"sync"
 )
 

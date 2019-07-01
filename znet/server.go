@@ -1,11 +1,10 @@
 package znet
 
 import (
-	"awesomeProject/itface"
-	"awesomeProject/utils"
 	"fmt"
-	"github.com/deckarep/golang-set"
 	"github.com/fatih/color"
+	"github.com/phuhao00/zinx/itface"
+	"github.com/phuhao00/zinx/utils"
 	"math/rand"
 	"net"
 	"sort"
@@ -31,7 +30,6 @@ type Server struct {
 	OnConnStart	func(conn itface.IConnection)
 	//该Server的连接断开时的Hook函数
 	OnConnStop func(conn itface.IConnection)
-	ConnIdSet mapset.Set
 }
 
 /*
@@ -46,7 +44,6 @@ func NewServer () itface.IServer {
 		Port:utils.GlobalObject.TcpPort,
 		msgHandler: NewMsgHandle(),
 		ConnMgr:NewConnManager(),
-		ConnIdSet:mapset.NewSet(),
 	}
 	return s
 }
@@ -172,13 +169,6 @@ func (s *Server)GetNewCid() (NewCid uint32)  {
 	var tmpStr string
 	for _,ele:=range randomSlice{
 		tmpStr=tmpStr+ strconv.FormatInt(int64(ele),10)
-	}
-	if s.ConnIdSet.Contains(tmpStr) {
-		return s.GetNewCid()
-	}else {
-		s.ConnIdSet.Add(tmpStr)
-		id,_:=strconv.ParseInt(tmpStr,10,32)
-		NewCid=uint32(id)
 	}
 	return
 }
