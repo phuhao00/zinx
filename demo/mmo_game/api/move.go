@@ -1,12 +1,12 @@
 package api
 
 import (
-	"awesomeProject/itface"
-	"awesomeProject/demo/mmo_game/core"
-	"awesomeProject/demo/mmo_game/pb"
-	"awesomeProject/znet"
 	"fmt"
 	"github.com/golang/protobuf/proto"
+	"github.com/phuhao00/zinx/demo/mmo_game/core"
+	"github.com/phuhao00/zinx/demo/mmo_game/proto/PB"
+	"github.com/phuhao00/zinx/itface"
+	"github.com/phuhao00/zinx/znet"
 )
 
 //玩家移动
@@ -16,7 +16,7 @@ type MoveApi struct {
 //
 func (*MoveApi) Handle(request itface.IRequest) {
 	//1. 将客户端传来的proto协议解码
-	msg := &pb.Position{}
+	msg := &PB.Position{}
 	err := proto.Unmarshal(request.GetData(), msg)
 	if err != nil {
 		fmt.Println("Move: Position Unmarshal error ", err)

@@ -1,12 +1,12 @@
 package api
 
 import (
-	"awesomeProject/demo/mmo_game/core"
-	"awesomeProject/demo/mmo_game/pb"
-	"awesomeProject/itface"
-	"awesomeProject/znet"
 	"fmt"
 	"github.com/golang/protobuf/proto"
+	"github.com/phuhao00/zinx/demo/mmo_game/core"
+	"github.com/phuhao00/zinx/demo/mmo_game/proto/PB"
+	"github.com/phuhao00/zinx/itface"
+	"github.com/phuhao00/zinx/znet"
 	//"github.com/gin-gonic/gin"
 )
 
@@ -17,7 +17,7 @@ type WorldChatApi struct {
 //
 func (*WorldChatApi) Handle(request itface.IRequest) {
 	//1. 将客户端传来的proto协议解码
-	msg := &pb.Talk{}
+	msg := &PB.Talk{}
 	err := proto.Unmarshal(request.GetData(), msg)
 	if err != nil {
 		fmt.Println("Talk Unmarshal error ", err)

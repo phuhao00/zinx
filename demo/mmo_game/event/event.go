@@ -1,8 +1,8 @@
 package main
 
 import (
-	. "awesomeProject/demo/mmo_game/conf"
 	"github.com/gookit/event"
+	. "github.com/phuhao00/zinx/demo/mmo_game/conf"
 )
 func main()  {
 	//user:=&User{

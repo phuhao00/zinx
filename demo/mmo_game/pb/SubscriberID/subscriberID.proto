@@ -1,6 +1,0 @@
-syntax = "proto3";
-package SubscriberID;
-enum SubscriberId {
-    None = 0;
-    Normal =100001;
-}

@@ -1,6 +1,6 @@
 package conf
 
-import ."github.com/phuhao00/zinx/demo/mmo_game/pb/SubscriberID"
+import ."github.com/phuhao00/zinx/demo/mmo_game/proto/PB"
 //任务的状态
 const (
 	TaskState_Init =iota+1
@@ -26,7 +26,7 @@ type Target struct {
 func (task *Target)SubscribedEvents() map[string]interface{} {
 	return subscribedEvents[SubscriberId(task.Type)]
 }
-//
+
 type Task interface {
 	SetDone()
 }

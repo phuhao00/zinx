@@ -1,0 +1,6 @@
+syntax = "proto3";
+package ID;
+enum Message {
+    None = 0;
+    Multi = 1;
+}

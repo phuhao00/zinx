@@ -1,12 +1,12 @@
 package main
 
 import (
-	"awesomeProject/demo/mmo_game/api"
-	"awesomeProject/demo/mmo_game/core"
-	"awesomeProject/itface"
-	"awesomeProject/znet"
 	"flag"
 	"fmt"
+	"github.com/phuhao00/zinx/demo/mmo_game/api"
+	"github.com/phuhao00/zinx/demo/mmo_game/core"
+	"github.com/phuhao00/zinx/itface"
+	"github.com/phuhao00/zinx/znet"
 )
 
 //当客户端建立连接的时候的hook函数
