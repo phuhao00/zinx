@@ -1,0 +1,1 @@
+alter table `global_table` add column family_battle text default '';
