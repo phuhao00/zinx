@@ -1,10 +1,10 @@
 package core
 
 import (
-	"awesomeProject/itface"
-	"awesomeProject/demo/mmo_game/pb"
 	"fmt"
 	"github.com/golang/protobuf/proto"
+	"github.com/phuhao00/zinx/demo/mmo_game/proto/PB"
+	"github.com/phuhao00/zinx/itface"
 	"math/rand"
 	"sync"
 )
@@ -48,7 +48,7 @@ func NewPlayer(conn itface.IConnection) *Player {
 //告知客户端pid,同步已经生成的玩家ID给客户端
 func (p *Player) SyncPid() {
 	//组建MsgId0 proto数据
-	data := &pb.SyncPid{
+	data := &PB.SyncPid{
 		Pid: p.Pid,
 	}
 
@@ -60,11 +60,11 @@ func (p *Player) SyncPid() {
 func (p *Player) BroadCastStartPosition() {
 
 	//组建MsgId200 proto数据
-	msg := &pb.BroadCast{
+	msg := &PB.BroadCast{
 		Pid: p.Pid,
 		Tp:  2, //TP2 代表广播坐标
-		Data: &pb.BroadCast_P{
-			P: &pb.Position{
+		Data: &PB.BroadCast_P{
+			P: &PB.Position{
 				X: p.X,
 				Y: p.Y,
 				Z: p.Z,
@@ -88,11 +88,11 @@ func (p *Player) SyncSurrounding() {
 		players = append(players, WorldMgrObj.GetPlayerByPid(int32(pid)))
 	}
 	//3.1 组建MsgId200 proto数据
-	msg := &pb.BroadCast{
+	msg := &PB.BroadCast{
 		Pid: p.Pid,
 		Tp:  2, //TP2 代表广播坐标
-		Data: &pb.BroadCast_P{
-			P: &pb.Position{
+		Data: &PB.BroadCast_P{
+			P: &PB.Position{
 				X: p.X,
 				Y: p.Y,
 				Z: p.Z,
@@ -106,11 +106,11 @@ func (p *Player) SyncSurrounding() {
 	}
 	//4 让周围九宫格内的玩家出现在自己的视野中
 	//4.1 制作Message SyncPlayers 数据
-	playersData := make([]*pb.Player, 0, len(players))
+	playersData := make([]*PB.Player, 0, len(players))
 	for _, player := range players {
-		p := &pb.Player{
+		p := &PB.Player{
 			Pid: player.Pid,
-			P: &pb.Position{
+			P: &PB.Position{
 				X: player.X,
 				Y: player.Y,
 				Z: player.Z,
@@ -121,7 +121,7 @@ func (p *Player) SyncSurrounding() {
 	}
 
 	//4.2 封装SyncPlayer protobuf数据
-	SyncPlayersMsg := &pb.SyncPlayers{
+	SyncPlayersMsg := &PB.SyncPlayers{
 		Ps: playersData[:],
 	}
 
@@ -132,10 +132,10 @@ func (p *Player) SyncSurrounding() {
 //广播玩家聊天
 func (p *Player) Talk(content string) {
 	//1. 组建MsgId200 proto数据
-	msg := &pb.BroadCast{
+	msg := &PB.BroadCast{
 		Pid: p.Pid,
 		Tp:  1, //TP 1 代表聊天广播
-		Data: &pb.BroadCast_Content{
+		Data: &PB.BroadCast_Content{
 			Content: content,
 		},
 	}
@@ -158,11 +158,11 @@ func (p *Player) UpdatePos(x float32, y float32, z float32, v float32) {
 	p.V = v
 
 	//组装protobuf协议，发送位置给周围玩家
-	msg := &pb.BroadCast{
+	msg := &PB.BroadCast{
 		Pid: p.Pid,
 		Tp:  4, //4- 移动之后的坐标信息
-		Data: &pb.BroadCast_P{
-			P: &pb.Position{
+		Data: &PB.BroadCast_P{
+			P: &PB.Position{
 				X: p.X,
 				Y: p.Y,
 				Z: p.Z,
@@ -199,7 +199,7 @@ func (p *Player) LostConnection() {
 	players := p.GetSurroundingPlayers()
 
 	//2 封装MsgID:201消息
-	msg := &pb.SyncPid{
+	msg := &PB.SyncPid{
 		Pid: p.Pid,
 	}
 
