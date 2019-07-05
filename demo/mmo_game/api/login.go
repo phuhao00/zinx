@@ -1,18 +1,38 @@
 package api
 
 import (
+	"database/sql"
 	"fmt"
+	_"github.com/go-sql-driver/mysql"
 	"github.com/golang/protobuf/proto"
 	"github.com/phuhao00/zinx/demo/mmo_game/proto/PB"
 	"github.com/phuhao00/zinx/itface"
 	"github.com/phuhao00/zinx/znet"
-	"database/sql"
- 	"github.com/go-sql-driver/mysql"
-
+	"time"
 )
 
 type sign_up struct {
 	znet.BaseRouter
+}
+const (
+	USERNAME = "root"
+	PASSWORD = "huhao123"
+	NETWORK  = "tcp"
+	SERVER   = "localhost"
+	PORT     = 3306
+	DATABASE = "rose_pd"
+)
+var MysqlDB *sql.DB
+func init() {
+	dsn := fmt.Sprintf("%s:%s@%s(%s:%d)/%s",USERNAME,PASSWORD,NETWORK,SERVER,PORT,DATABASE)
+	MysqlDB,err := sql.Open("mysql",dsn)
+	if err != nil{
+		fmt.Printf("Open mysql failed,err:%v\n",err)
+		return
+	}
+	MysqlDB.SetConnMaxLifetime(100*time.Second)  //最大连接周期，超过时间的连接就close
+	MysqlDB.SetMaxOpenConns(100)//设置最大连接数
+	MysqlDB.SetMaxIdleConns(16) //设置闲置连接数
 }
 
 func (*sign_up)SignUp(request itface.IRequest)  {
@@ -23,6 +43,15 @@ func (*sign_up)SignUp(request itface.IRequest)  {
 		fmt.Println("Move: Position Unmarshal error ", err)
 		return
 	}
+	strSelect:="select * from user where name="
 
-	
+	stmt,err:=MysqlDB.Prepare(strSelect)
+	if err==nil {
+		res,err:=stmt.Query(msg.Account)
+		if err==nil {
+			if res!=nil {
+
+			}
+		}
+	}
 }
