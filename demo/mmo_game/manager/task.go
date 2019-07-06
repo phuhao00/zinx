@@ -1,8 +1,8 @@
 package manager
 
 import (
-	. "awesomeProject/demo/mmo_game/conf"
 	"encoding/json"
+	. "github.com/phuhao00/zinx/demo/mmo_game/conf"
 	"io/ioutil"
 )
 
