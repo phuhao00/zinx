@@ -3,6 +3,7 @@ package znet
 import (
 	"errors"
 	"fmt"
+	"github.com/phuhao00/zinx/demo/mmo_game/proto/ID"
 	"github.com/phuhao00/zinx/itface"
 	"github.com/phuhao00/zinx/utils"
 	"io"
@@ -192,7 +193,7 @@ func (c *Connection) RemoteAddr() net.Addr {
 }
 
 //直接将Message数据发送数据给远程的TCP客户端
-func (c *Connection) SendMsg(msgId uint32, data []byte) error {
+func (c *Connection) SendMsg(msgId ID.Message, data []byte) error {
 	if c.isClosed == true {
 		return errors.New("Connection closed when send msg")
 	}
@@ -210,7 +211,7 @@ func (c *Connection) SendMsg(msgId uint32, data []byte) error {
 	return nil
 }
 
-func (c *Connection) SendBuffMsg(msgId uint32, data []byte) error {
+func (c *Connection) SendBuffMsg(msgId ID.Message, data []byte) error {
 	if c.isClosed == true {
 		return errors.New("Connection closed when send buff msg")
 	}

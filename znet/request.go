@@ -1,6 +1,9 @@
 package znet
 
-import "github.com/phuhao00/zinx/itface"
+import (
+	"github.com/phuhao00/zinx/demo/mmo_game/proto/ID"
+	"github.com/phuhao00/zinx/itface"
+)
 
 type Request struct {
 	conn itface.IConnection //已经和客户端建立好的 链接
@@ -16,6 +19,6 @@ func(r *Request) GetData() []byte {
 }
 
 //获取请求的消息的ID
-func (r *Request) GetMsgID() uint32 {
+func (r *Request) GetMsgID() ID.Message {
 	return r.msg.GetMsgId()
 }

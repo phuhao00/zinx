@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/golang/protobuf/proto"
 	"github.com/phuhao00/zinx/demo/mmo_game/proto/PB"
+	"github.com/phuhao00/zinx/demo/mmo_game/proto/ID"
 	"github.com/phuhao00/zinx/itface"
 	"math/rand"
 	"sync"
@@ -11,9 +12,9 @@ import (
 
 //玩家对象
 type Player struct {
-	Pid  int32              //玩家ID
-	Conn itface.IConnection //当前玩家的连接
-	X    float32            //平面x坐标
+	Pid  int32
+	X    float32            //平	Pid  int32              //玩家ID
+	Conn itface.IConnection //当前玩家的连接面x坐标
 	Y    float32            //高度
 	Z    float32            //平面y坐标 (注意不是Y)
 	V    float32            //旋转0-360度
@@ -217,7 +218,7 @@ func (p *Player) LostConnection() {
 	发送消息给客户端，
 	主要是将pb的protobuf数据序列化之后发送
 */
-func (p *Player) SendMsg(msgId uint32, data proto.Message) {
+func (p *Player) SendMsg(msgId ID.Message, data proto.Message) {
 	//fmt.Printf("before Marshal data = %+v\n", data)
 	//将proto Message结构体序列化
 	msg, err := proto.Marshal(data)

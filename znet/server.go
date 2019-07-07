@@ -3,6 +3,7 @@ package znet
 import (
 	"fmt"
 	"github.com/fatih/color"
+	PB "github.com/phuhao00/zinx/demo/mmo_game/proto/ID"
 	"github.com/phuhao00/zinx/itface"
 	"github.com/phuhao00/zinx/utils"
 	"math/rand"
@@ -125,7 +126,7 @@ func (s *Server) Serve() {
 }
 
 //路由功能：给当前服务注册一个路由业务方法，供客户端链接处理使用
-func (s *Server)AddRouter(msgId uint32, router itface.IRouter) {
+func (s *Server)AddRouter(msgId PB.Message, router itface.IRouter) {
 	s.msgHandler.AddRouter(msgId, router)
 }
 

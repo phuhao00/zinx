@@ -5,17 +5,18 @@ import (
 	"github.com/phuhao00/zinx/itface"
 	"github.com/phuhao00/zinx/utils"
 	"strconv"
+	"github.com/phuhao00/zinx/demo/mmo_game/proto/ID"
 )
 
 type MsgHandle struct {
-	Apis           map[uint32]itface.IRouter //存放每个MsgId 所对应的处理方法的map属性
+	Apis           map[ID.Message]itface.IRouter //存放每个MsgId 所对应的处理方法的map属性
 	WorkerPoolSize uint32                    //业务工作Worker池的数量
 	TaskQueue      []chan itface.IRequest    //Worker负责取任务的消息队列
 }
 
 func NewMsgHandle() *MsgHandle {
 	return &MsgHandle{
-		Apis: make(map[uint32]itface.IRouter),
+		Apis: make(map[ID.Message]itface.IRouter),
 		WorkerPoolSize:utils.GlobalObject.WorkerPoolSize,
 		//一个worker对应一个queue
 		TaskQueue:make([]chan itface.IRequest, utils.GlobalObject.WorkerPoolSize),
@@ -50,7 +51,7 @@ func (mh *MsgHandle) DoMsgHandler(request itface.IRequest) {
 }
 
 //为消息添加具体的处理逻辑
-func (mh *MsgHandle) AddRouter(msgId uint32, router itface.IRouter) {
+func (mh *MsgHandle) AddRouter(msgId ID.Message, router itface.IRouter) {
 	//1 判断当前msg绑定的API处理方法是否已经存在
 	if _, ok := mh.Apis[msgId]; ok {
 		panic("repeated api , msgId = " + strconv.Itoa(int(msgId)))

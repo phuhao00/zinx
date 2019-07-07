@@ -9,9 +9,11 @@ import (
 	"github.com/phuhao00/zinx/itface"
 	"github.com/phuhao00/zinx/znet"
 	"time"
+	"github.com/phuhao00/zinx/demo/mmo_game/db"
+	."github.com/phuhao00/zinx/demo/mmo_game/core"
 )
 
-type sign_up struct {
+type Login struct {
 	znet.BaseRouter
 }
 const (
@@ -35,7 +37,7 @@ func init() {
 	MysqlDB.SetMaxIdleConns(16) //设置闲置连接数
 }
 
-func (*sign_up)SignUp(request itface.IRequest)  {
+func (*Login)SignUp(request itface.IRequest)  {
 	//1. 将客户端传来的proto协议解码
 	msg := &PB.Login{}
 	err := proto.Unmarshal(request.GetData(), msg)
@@ -46,11 +48,28 @@ func (*sign_up)SignUp(request itface.IRequest)  {
 	strSelect:="select * from user where name="
 
 	stmt,err:=MysqlDB.Prepare(strSelect)
+	defer stmt.Close()
 	if err==nil {
-		res,err:=stmt.Query(msg.Account)
+		rows,err:=stmt.Query(msg.Account)
 		if err==nil {
-			if res!=nil {
-
+			var userInfo db.UserTB
+			if rows !=nil{
+				rows.Scan(
+					&userInfo.Id,
+					&userInfo.Age,
+					&userInfo.Email,
+					&userInfo.Phone_num,
+					&userInfo.Pwd,
+					&userInfo.Sex,
+					)
+				player:=userInfo.ToPlayer()
+				player.Conn=request.GetConnection()
+				WorldMgrObj.AddPlayer(player)
+				resp:=&PB.LoginResp{
+					Code: 200,
+					Desc: "login success",
+				}
+				player.SendMsg(request.GetMsgID(),resp)
 			}
 		}
 	}

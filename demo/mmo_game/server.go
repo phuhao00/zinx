@@ -7,6 +7,7 @@ import (
 	"github.com/phuhao00/zinx/demo/mmo_game/core"
 	"github.com/phuhao00/zinx/itface"
 	"github.com/phuhao00/zinx/znet"
+	"github.com/phuhao00/zinx/demo/mmo_game/proto/ID"
 )
 
 //当客户端建立连接的时候的hook函数
@@ -68,9 +69,9 @@ func main() {
 	s.SetOnConnStop(OnConnectionLost)
 
 	//注册路由
-	s.AddRouter(2, &api.WorldChatApi{})
-	s.AddRouter(3, &api.MoveApi{})
-
+	s.AddRouter(ID.Message_Chat, &api.WorldChatApi{})
+	s.AddRouter(ID.Message_Move, &api.MoveApi{})
+	s.AddRouter(ID.Message_SignIn, &api.Login{})
 	//启动服务
 	s.Serve()
 }

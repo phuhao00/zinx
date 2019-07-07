@@ -13,6 +13,8 @@ type WorldManager struct {
 	pLock   sync.RWMutex      //保护Players的互斥读写机制
 }
 
+type chHandle func( interface{})
+
 //提供一个对外的世界管理模块句柄
 var WorldMgrObj *WorldManager
 
@@ -23,7 +25,6 @@ func init() {
 		AoiMgr:  NewAOIManager(AOI_MIN_X, AOI_MAX_X, AOI_CNTS_X, AOI_MIN_Y, AOI_MAX_Y, AOI_CNTS_Y),
 	}
 }
-
 //提供添加一个玩家的的功能，将玩家添加进玩家信息表Players
 func (wm *WorldManager) AddPlayer(player *Player) {
 	//将player添加到 世界管理器中
